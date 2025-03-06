@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repostería Phoenix</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- SweetAlert2-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Cookies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div id="loading">
+        <div class="text-center">
+            <i class="fas fa-fire-alt fa-3x text-warning mb-3" id="loading-logo"></i>
+            <h1 class="display-4 fw-bold" id="loading-text">Phoenix</h1>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-warning" href="#">
+            <i class="fas fa-fire-alt me-2"></i>Phoenix
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#menu">Menú</a></li>
+                <li class="nav-item"><a class="nav-link" href="#reservas">Reservas</a></li>
+                <li class="nav-item"><a class="nav-link" href="#pedidos">Pedidos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+                <li class="nav-item" id="nav-login"><a class="nav-link" href="login.html">Iniciar Sesión</a></li>
+                <li class="nav-item" id="nav-register"><a class="nav-link" href="register.html">Registrarse</a></li>
+                <li class="nav-item dropdown" id="nav-user" style="display: none;">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-user"></i> <span id="username"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#" id="logout-btn">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#carrito">
+                        <i class="fas fa-shopping-cart"></i> Carrito <span id="cart-count" class="badge bg-warning">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="d-lg-none d-flex justify-content-end mt-2" id="responsive-auth">
+        <a class="btn btn-warning me-2 d-none" href="login.html">Iniciar Sesión</a>
+        <a class="btn btn-warning d-none" href="registro.html">Registrarse</a>
+        <div class="dropdown d-none" id="responsive-user">
+            <a class="btn btn-warning dropdown-toggle" href="#" id="responsiveUserDropdown" role="button" data-bs-toggle="dropdown">
+                <i class="fas fa-user"></i> <span id="responsive-username"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" id="responsive-logout-btn">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section d-flex align-items-center text-center text-white position-relative">
+        <div class="container position-relative z-index-2">
+            <h1 class="display-4 fw-bold">Bienvenidos a Phoenix</h1>
+            <p class="lead">Ázucar inmortal, un deleite eterno</p>
+            <a href="#menu" class="btn btn-warning btn-lg mt-3">Explorar Menú</a>
+        </div>
+    </header>
+
+    <!-- Menú Section -->
+<section id="menu" class="py-5 bg-light">
+    <div class="container text-center">
+        <h2 class="fw-bold text-dark mb-4">Nuestro Menú</h2>
+        <div class="row g-4">
+            <!-- Producto 1 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-lg">
+                    <img src="images/pastel-chocolate.jpg" class="card-img-top" alt="Pastel de Chocolate">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Pastel de Chocolate</h5>
+                        <p class="card-text">Esponjoso y delicioso, perfecto para los amantes del cacao. Precio: $20</p>
+                        <button class="btn btn-warning add-to-cart" data-name="Pastel de Chocolate" data-price="20">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Producto 2 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-lg">
+                    <img src="images/cupcakes.jpg" class="card-img-top" alt="Cupcakes">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Cupcakes</h5>
+                        <p class="card-text">Una explosión de sabor en cada bocado. Precio: $15</p>
+                        <button class="btn btn-warning add-to-cart" data-name="Cupcakes" data-price="15">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Producto 3 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-lg">
+                    <img src="images/galletas.jpg" class="card-img-top" alt="Galletas">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Galletas Caseras</h5>
+                        <p class="card-text">Crujientes y llenas de sabor, horneadas con amor. Precio: $10</p>
+                        <button class="btn btn-warning add-to-cart" data-name="Galletas Caseras" data-price="10">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Producto 4 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-lg">
+                    <img src="images/tarta-frutas.jpg" class="card-img-top" alt="Tarta de Frutas">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Tarta de Frutas</h5>
+                        <p class="card-text">Fresca y deliciosa, con una variedad de frutas. Precio: $25</p>
+                        <button class="btn btn-warning add-to-cart" data-name="Tarta de Frutas" data-price="25">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Producto 5 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-lg">
+                    <img src="images/muffins.jpg" class="card-img-top" alt="Muffins">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Muffins</h5>
+                        <p class="card-text">Suaves y esponjosos, perfectos para cualquier ocasión. Precio: $12</p>
+                        <button class="btn btn-warning add-to-cart" data-name="Muffins" data-price="12">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Producto 6 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-lg">
+                    <img src="images/pastel-fresa.jpeg" class="card-img-top" alt="Pastel de Fresa">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Pastel de Fresa</h5>
+                        <p class="card-text">Delicioso pastel con fresas frescas. Precio: $22</p>
+                        <button class="btn btn-warning add-to-cart" data-name="Pastel de Fresa" data-price="22">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Producto 7 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-lg">
+                    <img src="images/brownies.jpeg" class="card-img-top" alt="Brownies">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Brownies</h5>
+                        <p class="card-text">Ricos y chocolatosos brownies. Precio: $18</p>
+                        <button class="btn btn-warning add-to-cart" data-name="Brownies" data-price="18">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Producto 8 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-lg">
+                    <img src="images/tarta-queso.jpg" class="card-img-top" alt="Tarta de Queso">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Tarta de Queso</h5>
+                        <p class="card-text">Cremosa tarta de queso con base de galleta. Precio: $20</p>
+                        <button class="btn btn-warning add-to-cart" data-name="Tarta de Queso" data-price="20">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Producto 9 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-lg">
+                    <img src="images/tarta-limon.jpg" class="card-img-top" alt="Tarta de Limón">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Tarta de Limón</h5>
+                        <p class="card-text">Refrescante tarta de limón con merengue. Precio: $23</p>
+                        <button class="btn btn-warning add-to-cart" data-name="Tarta de Limón" data-price="23">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Carrito Section -->
+    <section id="carrito" class="py-5 bg-dark text-white">
+        <div class="container">
+            <h2 class="text-center mb-4">Carrito de Compras</h2>
+            <div id="cart-items" class="mb-4">
+                <!-- Los productos agregados al carrito aparecerán aquí -->
+            </div>
+            <div id="cart-total-amount" class="text-end mb-4">
+                Total: $0.00
+            </div>
+            <button id="checkout-btn" class="btn btn-warning w-100">Reservar Pedido</button>
+        </div>
+    </section>
+
+    <!-- Reservas Section -->
+<section id="reservas" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-4 text-black">Reserva tu Pedido</h2>
+        <form id="reservaForm" class="needs-validation" novalidate>
+   
+            <div class="mb-3">
+                <label for="telefonoReserva" class="form-label">Teléfono</label>
+                <input type="tel" class="form-control" id="telefonoReserva" required>
+                <div class="invalid-feedback">
+                    Por favor, ingresa tu número de teléfono.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="fecha" class="form-label">Fecha de Entrega</label>
+                <input type="date" class="form-control" id="fecha" required>
+                <div class="invalid-feedback">
+                    Por favor, selecciona una fecha.
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="comentariosReserva" class="form-label">Comentarios Adicionales</label>
+                <textarea class="form-control" id="comentariosReserva" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-warning w-100">Reservar</button>
+        </form>
+    </div>
+</section>
+
+    <!-- Pedidos Personalizados Section -->
+    <section id="pedidos" class="py-5 bg-dark text-white">
+        <div class="container">
+            <h2 class="text-center mb-4">Solicita un Pedido Personalizado a Domicilio</h2>
+            <form id="pedidoForm" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="tipoPostre" class="form-label">Tipo de Postre</label>
+                    <select class="form-select" id="tipoPostre" required>
+                        <option value="">Selecciona un tipo de postre</option>
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+                    <div class="invalid-feedback">
+                        Por favor, selecciona un tipo de postre.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="saborPostre" class="form-label">Sabor del Pan</label>
+                    <select class="form-select" id="saborPostre" required>
+                        <option value="">Selecciona un sabor</option>
+                        <option value="Vainilla">Vainilla</option>
+                        <option value="Chocolate">Chocolate</option>
+                        <option value="Fresa">Fresa</option>
+                        <option value="Naranja">Naranja</option>
+                        <option value="Coco">Coco</option>
+                        <option value="Oreo">Oreo</option>
+                        <option value="Limón">Limón</option>
+                        <option value="Zanahoria">Zanahoria</option>
+                        <option value="Mango">Mango</option>
+                        <option value="Maracuyá">Maracuyá</option>
+                        <option value="Piña Colada">Piña Colada</option>
+                        <option value="Red Velvet">Red Velvet</option>
+                        <option value="Tres Leches">Tres Leches</option>
+                        <option value="Chocolate y Menta">Chocolate y Menta</option>
+                        <option value="Frutos Rojos">Frutos Rojos</option>
+                        <option value="Café">Café</option>
+                        <option value="Matcha">Matcha</option>
+                        <option value="Lavanda">Lavanda</option>
+                        <option value="Chai">Chai</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Por favor, selecciona un sabor.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="decoracion" class="form-label">Decoración (describa si desea un glaseado, decoracion de dulces, acompañamiento o mensaje personalizado.)</label>
+                    <textarea class="form-control" id="decoracion" rows="3" required></textarea>
+                    <div class="invalid-feedback">
+                        Por favor, describe la decoración que deseas.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="fechaEntrega" class="form-label">Fecha de Entrega</label>
+                    <input type="date" class="form-control" id="fechaEntrega" required>
+                    <div class="invalid-feedback">
+                        Por favor, selecciona una fecha de entrega.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="direccionEntrega" class="form-label">Dirección de Entrega</label>
+                    <input type="text" class="form-control" id="direccionEntrega" required>
+                    <div class="invalid-feedback">
+                        Por favor, ingresa la dirección de entrega.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="telefonoContacto" class="form-label">Teléfono de Contacto</label>
+                    <input type="tel" class="form-control" id="telefonoContacto" required>
+                    <div class="invalid-feedback">
+                        Por favor, ingresa tu número de teléfono.
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-warning w-100">Enviar Solicitud</button>
+            </form>
+        </div>
+    </section>
+
+   <!-- Contacto Section -->
+<section id="contacto" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-4 text-black">Contacto</h2>
+        <form id="contactoForm" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="asunto" class="form-label text-light">Asunto</label>
+                <input type="text" class="form-control" id="asunto" required>
+                <div class="invalid-feedback">
+                    Por favor, ingresa el asunto.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="mensaje" class="form-label text-light">Mensaje</label>
+                <textarea class="form-control" id="mensaje" rows="3" required></textarea>
+                <div class="invalid-feedback">
+                    Por favor, ingresa un mensaje.
+                </div>
+            </div>
+            <button type="submit" class="btn btn-warning w-100">Enviar</button>
+        </form>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white text-center py-4">
+        <p class="mb-0">&copy; 2025 Repostería Phoenix. Todos los derechos reservados.</p>
+        <div class="mt-2">
+            <a href="#" class="text-warning me-3"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-warning me-3"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-warning"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <!-- Modal for Reservation Details -->
+    <div class="modal fade" id="reservationModal" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-black" id="reservationModalLabel">Detalles de la Reserva</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-black">
+                    <p><strong>Nombre:</strong> <span id="modalUserName"></span></p>
+                    <p><strong>Email:</strong> <span id="modalUserEmail"></span></p>
+                    <p><strong>Teléfono:</strong> <span id="modalTelefono"></span></p>
+                    <p><strong>Fecha de Entrega:</strong> <span id="modalFecha"></span></p>
+                    <p><strong>Comentarios:</strong> <span id="modalComentarios"></span></p>
+                    <h5>Productos:</h5>
+                    <ul id="modalProductos"></ul>
+                    <p><strong>Total:</strong> $<span id="modalTotal"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
+    <script>
+        window.addEventListener('load', () => {
+            const loading = document.getElementById('loading');
+            setTimeout(() => {
+                loading.classList.add('hidden');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
